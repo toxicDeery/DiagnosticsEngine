@@ -77,8 +77,7 @@ namespace DiagnosticsEngine
             ClearPointsQuick(fourierSeriesPoints);
             for (int i = fftResult[step].Length / 2 + 1; i < fftResult[step].Length; ++i)
             {
-               fourierSeriesPoints.Points.AddXY(i * stepNu - nuNyq,
-               l10(Math.Abs(fftResult[step][i].Real)));
+               fourierSeriesPoints.Points.AddXY(i * stepNu - nuNyq, l10(Math.Abs(fftResult[step][i].Real)));
             }
             chartFourier.Series.Add(fourierSeriesPoints);
             chartFourier.ChartAreas[0].RecalculateAxesScale();
@@ -116,7 +115,7 @@ namespace DiagnosticsEngine
         private void Form1_Load(object sender, EventArgs e)
         {
             openFileDialog1.RestoreDirectory = true;
-            openFileDialog1.Filter = "WAV,MP3 файлы (*.wav, *.mp3) | *.wav; *.mp3";
+            openFileDialog1.Filter = "WAV (*.wav) | *.wav";
 
             audioSeriesPoints = new Series("АВХ");
             audioSeriesPoints.ChartType = SeriesChartType.Line;
@@ -175,14 +174,55 @@ namespace DiagnosticsEngine
                     for (int i = 0; i < fftInput.Length; i++)
                     {
                         fftInput[i] = new Complex(BitConverter.ToInt16(wav.data, times * sizeFFT + i * byteDepth * numCh), 0);
+                        //richTextBox1.AppendText(Convert.ToString(fftInput[i]) + '\n');
                     }
                     fftResult[times] = FourierFT.nfourierft(FourierFT.fourierft(fftInput));
+                    
+
                 }
                 pointsFFT = sizeFFT / byteDepth / numCh; // число точек в FFT окне
                 stepNu = 1.0 * wav.getSampleRate() / pointsFFT; // шаг частоты
                 nuNyq = wav.getSampleRate() / 2; // частота Найквиста
                 plotFFT();
                 //buttonSign.Enabled = true;
+            }
+
+        }
+
+        private void buttonSignature_Click(object sender, EventArgs e)
+        {
+            dataGridViewSingature.Rows.Clear();
+            dataGridViewSingature.Refresh();
+            Dictionary<int, Tuple<int, double>>[] highscores = new Dictionary<int, Tuple<int, double>>[fftResult.Length]; // доминирующие частоты на каждом шаге БПФ
+            for (int i = 0; i < highscores.Length; ++i)
+            {
+                highscores[i] = new Dictionary<int, Tuple<int, double>>();
+                for (int j = 0; j < rangeFreq.Length; ++j)
+                {
+                    highscores[i].Add(j, new Tuple<int, double>(0, 0.0));
+                }
+            }
+            int right_i = 0;
+            double mag = 0;
+            int index = 0;
+            stepHash = new List<Tuple<int, long>>();
+            for (int t = 0; t < fftResult.Length; t++)
+            {
+                for (int freq = lowerFreq; freq < upperFreq; freq++)
+                {
+                    right_i = Convert.ToUInt16((freq + nuNyq) / stepNu);
+                    mag = Math.Log(Math.Abs(fftResult[t][right_i].Real));
+                    index = getIndx(freq);
+                    if (mag > highscores[t][index].Item2) // Сохраним самое высокое значение силы сигнала и соответствующую частоту:
+                    {
+                         highscores[t][index] = new Tuple<int, double>(freq,mag);
+                    }
+                }
+                long h = hesh(highscores[t][0].Item1, highscores[t][1].Item1,
+                highscores[t][2].Item1, highscores[t][3].Item1, highscores[t][4].Item1); //сформируем хэш
+                if (h != 0)
+                stepHash.Add(new Tuple<int, long>(t, h));
+                dataGridViewSingature.Rows.Add(t, highscores[t][0].Item1.ToString(), highscores[t][1].Item1.ToString(), highscores[t][2].Item1.ToString(), highscores[t][3].Item1.ToString(), highscores[t][4].Item1.ToString());
             }
         }
     }

@@ -28,12 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.buttonOpen = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.labelOpened = new System.Windows.Forms.Label();
@@ -46,8 +46,17 @@
             this.label4 = new System.Windows.Forms.Label();
             this.comboBoxSelSize = new System.Windows.Forms.ComboBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.buttonSignature = new System.Windows.Forms.Button();
+            this.dataGridViewSingature = new System.Windows.Forms.DataGridView();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.chartAF)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartFourier)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSingature)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonOpen
@@ -106,16 +115,16 @@
             // 
             // chartAF
             // 
-            chartArea3.Name = "ChartArea1";
-            this.chartAF.ChartAreas.Add(chartArea3);
-            legend3.Name = "Legend1";
-            this.chartAF.Legends.Add(legend3);
+            chartArea1.Name = "ChartArea1";
+            this.chartAF.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chartAF.Legends.Add(legend1);
             this.chartAF.Location = new System.Drawing.Point(12, 54);
             this.chartAF.Name = "chartAF";
-            series3.ChartArea = "ChartArea1";
-            series3.Legend = "Legend1";
-            series3.Name = "Series1";
-            this.chartAF.Series.Add(series3);
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chartAF.Series.Add(series1);
             this.chartAF.Size = new System.Drawing.Size(314, 152);
             this.chartAF.TabIndex = 6;
             this.chartAF.Text = "chart1";
@@ -132,16 +141,16 @@
             // 
             // chartFourier
             // 
-            chartArea4.Name = "ChartArea1";
-            this.chartFourier.ChartAreas.Add(chartArea4);
-            legend4.Name = "Legend1";
-            this.chartFourier.Legends.Add(legend4);
+            chartArea2.Name = "ChartArea1";
+            this.chartFourier.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.chartFourier.Legends.Add(legend2);
             this.chartFourier.Location = new System.Drawing.Point(15, 241);
             this.chartFourier.Name = "chartFourier";
-            series4.ChartArea = "ChartArea1";
-            series4.Legend = "Legend1";
-            series4.Name = "Series1";
-            this.chartFourier.Series.Add(series4);
+            series2.ChartArea = "ChartArea1";
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            this.chartFourier.Series.Add(series2);
             this.chartFourier.Size = new System.Drawing.Size(311, 165);
             this.chartFourier.TabIndex = 8;
             this.chartFourier.Text = "chart1";
@@ -162,16 +171,74 @@
             this.comboBoxSelSize.Name = "comboBoxSelSize";
             this.comboBoxSelSize.Size = new System.Drawing.Size(61, 21);
             this.comboBoxSelSize.TabIndex = 10;
+            this.comboBoxSelSize.Text = "2048";
             // 
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
+            // buttonSignature
+            // 
+            this.buttonSignature.Location = new System.Drawing.Point(402, 25);
+            this.buttonSignature.Name = "buttonSignature";
+            this.buttonSignature.Size = new System.Drawing.Size(137, 23);
+            this.buttonSignature.TabIndex = 11;
+            this.buttonSignature.Text = "Вывести сигнатуру";
+            this.buttonSignature.UseVisualStyleBackColor = true;
+            this.buttonSignature.Click += new System.EventHandler(this.buttonSignature_Click);
+            // 
+            // dataGridViewSingature
+            // 
+            this.dataGridViewSingature.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewSingature.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column1,
+            this.Column2,
+            this.Column3,
+            this.Column4,
+            this.Column5,
+            this.Column6});
+            this.dataGridViewSingature.Location = new System.Drawing.Point(402, 56);
+            this.dataGridViewSingature.Name = "dataGridViewSingature";
+            this.dataGridViewSingature.Size = new System.Drawing.Size(672, 150);
+            this.dataGridViewSingature.TabIndex = 12;
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "Шаг";
+            this.Column1.Name = "Column1";
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "20-100";
+            this.Column2.Name = "Column2";
+            // 
+            // Column3
+            // 
+            this.Column3.HeaderText = "100-500";
+            this.Column3.Name = "Column3";
+            // 
+            // Column4
+            // 
+            this.Column4.HeaderText = "500-1000";
+            this.Column4.Name = "Column4";
+            // 
+            // Column5
+            // 
+            this.Column5.HeaderText = "1000-5000";
+            this.Column5.Name = "Column5";
+            // 
+            // Column6
+            // 
+            this.Column6.HeaderText = "5000-10000";
+            this.Column6.Name = "Column6";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 432);
+            this.ClientSize = new System.Drawing.Size(1126, 432);
+            this.Controls.Add(this.dataGridViewSingature);
+            this.Controls.Add(this.buttonSignature);
             this.Controls.Add(this.comboBoxSelSize);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.chartFourier);
@@ -188,6 +255,7 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.chartAF)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartFourier)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSingature)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -207,6 +275,14 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox comboBoxSelSize;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.Button buttonSignature;
+        private System.Windows.Forms.DataGridView dataGridViewSingature;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
     }
 }
 
