@@ -108,6 +108,7 @@ namespace DiagnosticsEngine
                     numCh = wav.getNumCh();
                     buttonReading.Enabled = true;
                     labelOpened.Text = openFileDialog1.SafeFileName;
+                    labelOpened.Visible = true;
                 }
             }
         }
@@ -129,12 +130,15 @@ namespace DiagnosticsEngine
             chartFourier.Series.Add(fourierSeriesPoints);
 
             buttonReading.Enabled = false;
+            buttonFourierFT.Enabled = false;
+            buttonSignature.Enabled = false;
 
         }
 
         private void buttonReading_Click(object sender, EventArgs e)
         {
-            N = Convert.ToInt32(textBoxSeconds.Text) * wav.getSampleRate();
+            //N = Convert.ToInt32(textBoxSeconds.Text) * wav.getSampleRate();
+            N = 5 * wav.getSampleRate();
             if (wav.data.Length < byteDepth * numCh * N)
             {
  
@@ -153,12 +157,12 @@ namespace DiagnosticsEngine
                 chartAF.Series.Add(audioSeriesPoints);
                 chartAF.ChartAreas[0].RecalculateAxesScale();
             }
-
+            buttonFourierFT.Enabled = true;
         }
 
         private void buttonFourierFT_Click(object sender, EventArgs e)
         {
-            sizeFFT = Convert.ToInt32(comboBoxSelSize.Text);
+            sizeFFT = 2048;
             if (sizeFFT > N * byteDepth * numCh)
             {
                 MessageBox.Show("Слишком большой размер окна БПФ");
@@ -186,7 +190,7 @@ namespace DiagnosticsEngine
                 plotFFT();
                 //buttonSign.Enabled = true;
             }
-
+            buttonSignature.Enabled = true;
         }
 
         private void buttonSignature_Click(object sender, EventArgs e)

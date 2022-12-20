@@ -86,6 +86,7 @@
             this.labelOpened.Size = new System.Drawing.Size(67, 13);
             this.labelOpened.TabIndex = 2;
             this.labelOpened.Text = "labelOpened";
+            this.labelOpened.Visible = false;
             // 
             // buttonReading
             // 
@@ -100,7 +101,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(257, 30);
+            this.label3.Location = new System.Drawing.Point(1320, 362);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(42, 13);
             this.label3.TabIndex = 4;
@@ -108,10 +109,11 @@
             // 
             // textBoxSeconds
             // 
-            this.textBoxSeconds.Location = new System.Drawing.Point(220, 27);
+            this.textBoxSeconds.Location = new System.Drawing.Point(1283, 359);
             this.textBoxSeconds.Name = "textBoxSeconds";
             this.textBoxSeconds.Size = new System.Drawing.Size(31, 20);
             this.textBoxSeconds.TabIndex = 5;
+            this.textBoxSeconds.Visible = false;
             // 
             // chartAF
             // 
@@ -122,10 +124,11 @@
             this.chartAF.Location = new System.Drawing.Point(12, 54);
             this.chartAF.Name = "chartAF";
             series1.ChartArea = "ChartArea1";
+            series1.IsVisibleInLegend = false;
             series1.Legend = "Legend1";
             series1.Name = "Series1";
             this.chartAF.Series.Add(series1);
-            this.chartAF.Size = new System.Drawing.Size(314, 152);
+            this.chartAF.Size = new System.Drawing.Size(384, 152);
             this.chartAF.TabIndex = 6;
             this.chartAF.Text = "chart1";
             // 
@@ -148,10 +151,11 @@
             this.chartFourier.Location = new System.Drawing.Point(15, 241);
             this.chartFourier.Name = "chartFourier";
             series2.ChartArea = "ChartArea1";
+            series2.IsVisibleInLegend = false;
             series2.Legend = "Legend1";
             series2.Name = "Series1";
             this.chartFourier.Series.Add(series2);
-            this.chartFourier.Size = new System.Drawing.Size(311, 165);
+            this.chartFourier.Size = new System.Drawing.Size(454, 165);
             this.chartFourier.TabIndex = 8;
             this.chartFourier.Text = "chart1";
             // 
@@ -160,9 +164,9 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(16, 217);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(73, 13);
+            this.label4.Size = new System.Drawing.Size(75, 13);
             this.label4.TabIndex = 9;
-            this.label4.Text = "Размер окна";
+            this.label4.Text = "Размерность";
             // 
             // comboBoxSelSize
             // 
@@ -179,7 +183,7 @@
             // 
             // buttonSignature
             // 
-            this.buttonSignature.Location = new System.Drawing.Point(402, 25);
+            this.buttonSignature.Location = new System.Drawing.Point(977, 217);
             this.buttonSignature.Name = "buttonSignature";
             this.buttonSignature.Size = new System.Drawing.Size(137, 23);
             this.buttonSignature.TabIndex = 11;
@@ -197,9 +201,9 @@
             this.Column4,
             this.Column5,
             this.Column6});
-            this.dataGridViewSingature.Location = new System.Drawing.Point(402, 56);
+            this.dataGridViewSingature.Location = new System.Drawing.Point(466, 54);
             this.dataGridViewSingature.Name = "dataGridViewSingature";
-            this.dataGridViewSingature.Size = new System.Drawing.Size(672, 150);
+            this.dataGridViewSingature.Size = new System.Drawing.Size(648, 150);
             this.dataGridViewSingature.TabIndex = 12;
             // 
             // Column1
@@ -236,7 +240,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1126, 432);
+            this.ClientSize = new System.Drawing.Size(1125, 432);
             this.Controls.Add(this.dataGridViewSingature);
             this.Controls.Add(this.buttonSignature);
             this.Controls.Add(this.comboBoxSelSize);

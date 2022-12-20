@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="DiagnosticsEngine.FourierFT">
+    <Position X="10.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAgAABAAAAA=</HashCode>
+      <FileName>FourierFT.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DiagnosticsEngine.wavFiles">
+    <Position X="6.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAQMAAQAAAAAIAgAAQAACAACAAAAAIAgAQAQAACEASA=</HashCode>
+      <FileName>wavFiles.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DiagnosticsEngine.Form1">
+    <Position X="8.5" Y="0.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>gcACAEACACkiBFBEAAjSQIEDgAA+RwDAgARJJBAAAAg=</HashCode>
+      <FileName>Form1.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
