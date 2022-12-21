@@ -90,31 +90,12 @@ namespace DiagnosticsEngine
 
         private void buttonOpen_Click(object sender, EventArgs e)
         {
-            if(openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK) // открытие файла WAV, MP3
-            {
-                string fileName = openFileDialog1.FileName;
-                if (fileName.Contains(".mp3")) // если MP3 - декодируем в WAV при помощи Lame
-                {
-                    var process = System.Diagnostics.Process.Start(AppDomain.CurrentDomain.BaseDirectory + "lame.exe", " --decode \"" + fileName + "\"");
-                    process.WaitForExit();
-                    fileName = fileName.Replace(".mp3", ".wav");
-                }
-                using (var file = System.IO.File.OpenRead(fileName))
-                {
-                    byte[] buffer = new byte[file.Length];
-                    file.Read(buffer, 0, buffer.Length);
-                    wav = new wavFiles(buffer);
-                    byteDepth = wav.getBPS() / 8;
-                    numCh = wav.getNumCh();
-                    buttonReading.Enabled = true;
-                    labelOpened.Text = openFileDialog1.SafeFileName;
-                    labelOpened.Visible = true;
-                }
-            }
+     
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
+          
             openFileDialog1.RestoreDirectory = true;
             openFileDialog1.Filter = "WAV (*.wav) | *.wav";
 
@@ -227,6 +208,31 @@ namespace DiagnosticsEngine
                 if (h != 0)
                 stepHash.Add(new Tuple<int, long>(t, h));
                 dataGridViewSingature.Rows.Add(t, highscores[t][0].Item1.ToString(), highscores[t][1].Item1.ToString(), highscores[t][2].Item1.ToString(), highscores[t][3].Item1.ToString(), highscores[t][4].Item1.ToString());
+            }
+        }
+
+        private void openFileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK) // открытие файла WAV, MP3
+            {
+                string fileName = openFileDialog1.FileName;
+                if (fileName.Contains(".mp3")) // если MP3 - декодируем в WAV при помощи Lame
+                {
+                    var process = System.Diagnostics.Process.Start(AppDomain.CurrentDomain.BaseDirectory + "lame.exe", " --decode \"" + fileName + "\"");
+                    process.WaitForExit();
+                    fileName = fileName.Replace(".mp3", ".wav");
+                }
+                using (var file = System.IO.File.OpenRead(fileName))
+                {
+                    byte[] buffer = new byte[file.Length];
+                    file.Read(buffer, 0, buffer.Length);
+                    wav = new wavFiles(buffer);
+                    byteDepth = wav.getBPS() / 8;
+                    numCh = wav.getNumCh();
+                    buttonReading.Enabled = true;
+                    labelOpened.Text = openFileDialog1.SafeFileName;
+                    labelOpened.Visible = true;
+                }
             }
         }
     }
