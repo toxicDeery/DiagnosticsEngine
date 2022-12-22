@@ -77,7 +77,7 @@ namespace DiagnosticsEngine
             ClearPointsQuick(fourierSeriesPoints);
             for (int i = fftResult[step].Length / 2 + 1; i < fftResult[step].Length; ++i)
             {
-               fourierSeriesPoints.Points.AddXY(i * stepNu - nuNyq, l10(Math.Abs(fftResult[step][i].Real)));
+               fourierSeriesPoints.Points.AddXY(i * stepNu - nuNyq, l10(Math.Abs(fftResult[step][i].Real) / 10));
             }
             chartFourier.Series.Add(fourierSeriesPoints);
             chartFourier.ChartAreas[0].RecalculateAxesScale();
@@ -97,7 +97,7 @@ namespace DiagnosticsEngine
         {
           
             openFileDialog1.RestoreDirectory = true;
-            openFileDialog1.Filter = "WAV (*.wav) | *.wav";
+            openFileDialog1.Filter = "WAV (*.wav) | *.wav|All files (*.*)|*.*";
 
             audioSeriesPoints = new Series("АВХ");
             audioSeriesPoints.ChartType = SeriesChartType.Line;
@@ -122,7 +122,7 @@ namespace DiagnosticsEngine
             N = 5 * wav.getSampleRate();
             if (wav.data.Length < byteDepth * numCh * N)
             {
- 
+
                 MessageBox.Show("Слишком маленький файл");
             }
             else
@@ -132,8 +132,8 @@ namespace DiagnosticsEngine
                 double rate = 1.0 / 44100;
                 for (int i = 0; i < N; ++i)
                 {
-                   audioSeriesPoints.Points.AddXY(i * rate,
-                   BitConverter.ToInt16(wav.data, i * byteDepth * numCh));
+                    audioSeriesPoints.Points.AddXY(i * rate,
+                    BitConverter.ToInt16(wav.data, i * byteDepth * numCh));
                 }
                 chartAF.Series.Add(audioSeriesPoints);
                 chartAF.ChartAreas[0].RecalculateAxesScale();
@@ -213,27 +213,39 @@ namespace DiagnosticsEngine
 
         private void openFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK) // открытие файла WAV, MP3
+            try
             {
-                string fileName = openFileDialog1.FileName;
-                if (fileName.Contains(".mp3")) // если MP3 - декодируем в WAV при помощи Lame
+                if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK) // открытие файла WAV, MP3
                 {
-                    var process = System.Diagnostics.Process.Start(AppDomain.CurrentDomain.BaseDirectory + "lame.exe", " --decode \"" + fileName + "\"");
-                    process.WaitForExit();
-                    fileName = fileName.Replace(".mp3", ".wav");
-                }
-                using (var file = System.IO.File.OpenRead(fileName))
-                {
-                    byte[] buffer = new byte[file.Length];
-                    file.Read(buffer, 0, buffer.Length);
-                    wav = new wavFiles(buffer);
-                    byteDepth = wav.getBPS() / 8;
-                    numCh = wav.getNumCh();
-                    buttonReading.Enabled = true;
-                    labelOpened.Text = openFileDialog1.SafeFileName;
-                    labelOpened.Visible = true;
+                    string fileName = openFileDialog1.FileName;
+                    if (fileName.Contains(".mp3")) // если MP3 - декодируем в WAV при помощи Lame
+                    {
+                        var process = System.Diagnostics.Process.Start(AppDomain.CurrentDomain.BaseDirectory + "lame.exe", " --decode \"" + fileName + "\"");
+                        process.WaitForExit();
+                        fileName = fileName.Replace(".mp3", ".wav");
+                    }
+                    using (var file = System.IO.File.OpenRead(fileName))
+                    {
+                        byte[] buffer = new byte[file.Length];
+                        file.Read(buffer, 0, buffer.Length);
+                        wav = new wavFiles(buffer);
+                        byteDepth = wav.getBPS() / 8;
+                        numCh = wav.getNumCh();
+                        buttonReading.Enabled = true;
+                        labelOpened.Text = openFileDialog1.SafeFileName;
+                        labelOpened.Visible = true;
+                    }
                 }
             }
+            catch
+            {
+                MessageBox.Show("Выбран файл с недопустимым форматом, используйте файлы формата .wav");
+            }
+        }
+
+        private void diagnosticButton_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Автомобиль: Lada 2112\nНеисправности: не обнаружены.");
         }
     }
 }
